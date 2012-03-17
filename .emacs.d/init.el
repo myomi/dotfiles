@@ -14,6 +14,17 @@
 ;; load-path に追加
 (add-to-load-path "elisp" "conf" "public_repos")
 
+;; auto-installの設定
+(when (require 'auto-install nil t)
+  ;; インストールディレクトリを指定する 初期値は、~/.emacs.d/auto-install
+  (setq auto-install-directory "~/.emacs.d/elisp/")
+  ;; EmacsWikiに登録されているelispの名前を取得する
+  (auto-install-update-emacswiki-package-name t)
+  ;; プロキシの設定
+  (setq url-proxy-services '(("http" . "localhost:8339")))
+  ;; install-elisp の関数を利用可能にする
+  (auto-install-compatibility-setup))
+
 ;; 改行と同時にインデント
 (global-set-key (kbd "C-m") 'newline-and-indent)
 ;; "C-c l" 行の折り返し表示を切り替える
